@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Produk Kami | Web Development</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/produk.css" />
+  <style>
+    /* Loader Styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .pulse-loader {
+      width: 100px;
+      height: 100px;
+      background-image: url('gambar/Logo%20Utama.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="pulse-loader"></div>
+  </div>
+
+  <header>
+    <nav class="navbar">
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="About us.html">CodenC Team</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="products-page">
+    <div class="intro">
+      <h1>Produk Kami</h1>
+      <p>Kami menawarkan layanan pengembangan web yang berkualitas dan sesuai kebutuhan bisnis Anda.</p>
+    </div>
+
+    <div class="products-list">
+      <!-- Daftar produk seperti sebelumnya -->
+      <div class="product-card">
+        <h2>Website Company Profile</h2>
+        <p>Membuat website profil perusahaan yang profesional dan responsif untuk memperkuat branding bisnis Anda.</p>
+      </div>
+      <div class="product-card">
+        <h2>E-commerce</h2>
+        <p>Membangun platform toko online yang mudah digunakan dengan fitur pembayaran dan pengelolaan produk lengkap.</p>
+      </div>
+      <div class="product-card">
+        <h2>Web Application</h2>
+        <p>Solusi aplikasi web custom sesuai kebutuhan spesifik bisnis, dengan performa optimal dan keamanan terjamin.</p>
+      </div>
+      <div class="product-card">
+        <h2>Landing Page</h2>
+        <p>Landing page marketing yang efektif dengan desain menarik dan CTA yang meningkatkan konversi.</p>
+      </div>
+      <div class="product-card">
+        <h2>CMS Development</h2>
+        <p>Membangun sistem manajemen konten agar Anda mudah mengelola website tanpa coding.</p>
+      </div>
+      <div class="product-card">
+        <h2>SEO Optimization</h2>
+        <p>Meningkatkan visibilitas website Anda di mesin pencari dengan teknik SEO terbaik.</p>
+      </div>
+      <div class="product-card">
+        <h2>Website Maintenance</h2>
+        <p>Layanan pemeliharaan dan update berkala agar website Anda tetap aman dan up-to-date.</p>
+      </div>
+      <div class="product-card">
+        <h2>Progressive Web Apps (PWA)</h2>
+        <p>Menghadirkan aplikasi web dengan pengalaman seperti aplikasi native di perangkat mobile.</p>
+      </div>
+      <div class="product-card">
+        <h2>UI/UX Design</h2>
+        <p>Desain antarmuka dan pengalaman pengguna yang intuitif dan menarik untuk meningkatkan engagement.</p>
+      </div>
+      <div class="product-card">
+        <h2>API Integration</h2>
+        <p>Menghubungkan website Anda dengan berbagai layanan pihak ketiga untuk fungsionalitas lebih lengkap.</p>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <a href="About us.html" class="cta-button">Hubungi Kami</a>
+    </div>
+  </main>
+
+  <script>
+    // Loader Script
+    window.addEventListener('load', function () {
+      document.getElementById('loader').style.display = 'none';
+    });
+
+    const links = document.querySelectorAll("a[href]:not([href='#'])");
+    links.forEach(link => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetUrl = this.href;
+        document.getElementById('loader').style.display = 'flex';
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 800);
+      });
+    });
+  </script>
+</body>
+</html>

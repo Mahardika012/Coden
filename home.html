@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | Web Development</title>
+  <link rel="stylesheet" href="css/home.css" />
+  <style>
+    /* Loader Styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .pulse-loader {
+      width: 100px;
+      height: 100px;
+      background-image: url('gambar/Logo%20Utama.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="pulse-loader"></div>
+  </div>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="Index.html">Dashborad</a></li>
+        <li><a href="Produck.html">Produck</a></li>
+        <li><a href="About us.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Yuk, bangun website kerenmu sekarang juga bersama kami!</h1>
+      <p>Buat website profesional mudah dan cepat tanpa ribet.</p>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <h2>Modern Design</h2>
+      <p>Desain modern yang elegan, bersih, dan profesional! Kami menawarkan solusi desain yang mengutamakan kenyamanan pengguna, estetika minimalis, dan tampilan yang memikat. Cocok untuk kamu yang ingin tampil beda, membangun citra brand yang kuat, dan meningkatkan kepercayaan pelanggan. Desain modern bukan hanya soal gaya—ini tentang fungsionalitas dan kesan pertama yang memukau. Saatnya upgrade websitemu dan tampil lebih unggul dari kompetitor!</p>
+    </div>
+    <div class="feature">
+      <h2>Fast & Secure</h2>
+      <p>Kami hadir dengan solusi desain modern yang tidak hanya memukau secara visual, tetapi juga dioptimalkan untuk kecepatan dan keamanan. Website yang cepat meningkatkan pengalaman pengguna, sementara sistem keamanan terbaik melindungi data bisnismu dan pelanggan. Tak perlu khawatir soal loading lambat atau ancaman siber – kami pastikan semuanya berjalan lancar dan terlindungi. Tampil profesional, aman, dan gesit di dunia digital mulai sekarang!</p>
+    </div>
+    <div class="feature">
+      <h2>Custom Solutions</h2>
+      <p>Setiap bisnis itu unik, dan websitemu juga harus mencerminkan hal itu. Kami menawarkan solusi kustom yang dirancang khusus sesuai dengan visi, kebutuhan, dan target pasar bisnismu. Mulai dari tampilan, fitur, hingga fungsionalitas, semuanya dibuat secara personal agar benar-benar sesuai dengan identitas brand kamu. Tak lagi memakai template umum – saatnya punya website yang benar-benar kamu banget!</p>
+    </div>
+  </section>
+
+  <!-- YouTube Section -->
+  <section class="youtube-section">
+    <div class="video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/UQs10OAD5ww"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 CodenC. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Loader Script
+    window.addEventListener('load', function () {
+      document.getElementById('loader').style.display = 'none';
+    });
+
+    const links = document.querySelectorAll("a[href]:not([href='#'])");
+    links.forEach(link => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetUrl = this.href;
+        document.getElementById('loader').style.display = 'flex';
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 800);
+      });
+    });
+  </script>
+</body>
+</html>

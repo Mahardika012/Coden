@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tentang Tim & Kontak</title>
+
+  <!-- Font Awesome CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* Reset dasar */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Background Video Styling */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1; /* video di belakang konten */
+      filter: brightness(0.7); /* supaya teks lebih terbaca */
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #0d47a1, #e3f2fd);
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #222;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      color: #ffcc00;
+    }
+
+    /* Section Container */
+    .section-container {
+      padding: 60px 20px;
+      text-align: center;
+      margin: 20px auto;
+      max-width: 1200px;
+      color: #fff;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.7);
+    }
+
+    /* Section Title */
+    .section-container h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #fff;
+      position: relative;
+      animation: fadeInDown 1s ease forwards;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+    }
+
+    /* Team Grid */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+      justify-items: center; /* buat semua item rata tengah secara horizontal */
+    }
+
+    /* Individual Member */
+    .team-member {
+      padding: 20px;
+      border-radius: 15px;
+      transform: translateY(40px);
+      opacity: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+      /* hapus background putih dan box shadow agar menyatu background */
+      width: 100%;
+      max-width: 280px;
+      box-sizing: border-box;
+    }
+
+    /* Khusus profil ke-5 supaya ada grid column start & end untuk posisinya tepat di tengah baris */
+    #last-member {
+      justify-self: center; /* pastikan benar-benar di tengah */
+    }
+
+    .team-member.visible {
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .team-member:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 204, 0, 0.5);
+    }
+
+    .team-member img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 3px solid #ffcc00;
+      animation: popIn 0.8s ease forwards;
+    }
+
+    /* Social Icons */
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(238, 238, 238, 0.8);
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-size: 18px;
+      transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    }
+
+    .social-icons a:hover {
+      background-color: #ffcc00;
+      color: #222;
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* Kontak Section */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    }
+
+    .social-links a:hover {
+      color: #ffcc00;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      .navbar ul {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .section-container h2 {
+        font-size: 2rem;
+      }
+
+      .team-member img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Video background -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="gambar/profil/bg.mp4" type="video/mp4" />
+    Browser Anda tidak mendukung video HTML5.
+  </video>
+
+  <header>
+    <nav class="navbar">
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="Produck.html">Product</a></li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="tentang" class="section-container">
+      <h2>Tim Kami</h2>
+      <div class="team-grid">
+        <!-- Profil 1 -->
+        <div class="team-member">
+          <img src="gambar/profil/yuda.jpg" alt="Wirayudha" />
+          <h3>Wirayudha</h3>
+          <div class="social-icons">
+            <a href="https://instagram.com/wirayudha" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/628123456789" target="_blank" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://facebook.com/wirayudha" target="_blank" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://tiktok.com/@wirayudha" target="_blank" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Profil 2 -->
+        <div class="team-member">
+          <img src="gambar/profil/tirto.jpg" alt="Tirta" />
+          <h3>Tirta</h3>
+          <div class="social-icons">
+            <a href="https://instagram.com/dewisari" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/628987654321" target="_blank" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://facebook.com/dewisari" target="_blank" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://tiktok.com/@dewisari" target="_blank" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Profil 3 -->
+        <div class="team-member">
+          <img src="gambar/profil/kae.jpg" alt="Budi Santoso" />
+          <h3>Prasna</h3>
+          <div class="social-icons">
+            <a href="https://instagram.com/budisantoso" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/628112233445" target="_blank" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://facebook.com/budisantoso" target="_blank" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://tiktok.com/@budisantoso" target="_blank" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Profil 4 -->
+        <div class="team-member">
+          <img src="gambar/profil/dektya.jpg" alt="Aditya" />
+          <h3>Aditya</h3>
+          <div class="social-icons">
+            <a href="https://instagram.com/budisantoso" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/628112233445" target="_blank" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://facebook.com/budisantoso" target="_blank" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://tiktok.com/@budisantoso" target="_blank" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+>
+       <!-- Profil 5 (dengan id untuk styling tengah) -->
+        <div class="team-member" id="last-member">
+          <img src="gambar/profil/king.jpg" alt="Deva Pande" />
+          <h3>Deva Pande</h3>
+          <div class="social-icons">
+            <a href="https://instagram.com/budisantoso" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/628112233445" target="_blank" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://facebook.com/budisantoso" target="_blank" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://tiktok.com/@budisantoso" target="_blank" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+      </div> 
+    </section>
+    <section id="kontak" class="section-container">
+      <h2>Kontak Kami</h2>
+      <div class="social-links">
+        <a href="https://instagram.com/yourteam" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="https://wa.me/628123456789" target="_blank" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a href="https://facebook.com/yourteam" target="_blank" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i> Facebook
+        </a>
+        <a href="https://tiktok.com/@yourteam" target="_blank" aria-label="TikTok">
+          <i class="fab fa-tiktok"></i> TikTok
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Animasi muncul saat scroll dengan IntersectionObserver
+    const elements = document.querySelectorAll('.team-member');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    elements.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

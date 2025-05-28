@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome | Let's make your Website now!!!</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="gambar/Logo Utama.png" type="image/x-icon" />
+
+  <style>
+    /* Loader Styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #loader img {
+      width: 100px;
+      height: 100px;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <img src="gambar/Logo Utama.png" alt="Loading..." />
+  </div>
+
+  <header>
+    <div class="logo">
+      <a href="dashboard.html">
+        <img src="gambar/Logo Utama.png" alt="Logo" />
+      </a>
+    </div>
+  </header>
+
+  <main class="landing">
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline class="bg-video">
+      <source src="gambar/background.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Konten halaman -->
+    <div class="intro">
+      <h1>Welcome to Our Web Development Platform</h1>
+      <p>We build high-performance, scalable, and stunning websites and applications for your business. Let’s create something great together!</p>
+      <a href="home.html" class="cta-button">Get Started</a>
+    </div>
+  </main>
+
+  <!-- Script for Loader -->
+  <script>
+    window.addEventListener('load', function () {
+      const loader = document.getElementById('loader');
+      loader.style.display = 'none';
+    });
+
+    // Loader saat klik link
+    const links = document.querySelectorAll("a[href]:not([href='#'])");
+    links.forEach(link => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetUrl = this.href;
+        document.getElementById('loader').style.display = 'flex';
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 800);
+      });
+    });
+  </script>
+</body>
+</html>
